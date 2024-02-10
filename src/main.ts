@@ -43,16 +43,23 @@ export type dataT = {
 //--START
 /////////////////////////////////////////////////////
 const signupform = document.querySelector("form.signup") as HTMLFormElement;
-const signupEmailInp: HTMLInputElement = signupform.email;
-const siginupPasswordInp: HTMLInputElement = signupform.password;
+const signupEmailInp: HTMLInputElement = signupform.querySelector(
+  "#signup-email"
+) as HTMLInputElement;
+const siginupPasswordInp: HTMLInputElement = signupform.querySelector(
+  "#signup-password"
+) as HTMLInputElement;
 const signupSumbit = signupform.signupSubmit;
 const hasAccBtn = signupform.querySelector(
   "#has-account-btn"
 ) as HTMLAnchorElement;
-
 const LoginForm = document.querySelector("form.login") as HTMLFormElement;
-const LoginEmailInp: HTMLInputElement = LoginForm.email;
-const LoginPasswordInp: HTMLInputElement = LoginForm.password;
+const LoginEmailInp: HTMLInputElement = LoginForm.querySelector(
+  "#login-email"
+) as HTMLInputElement;
+const LoginPasswordInp: HTMLInputElement = LoginForm.querySelector(
+  "#login-password"
+) as HTMLInputElement;
 const loginSumbit = LoginForm.SubmitButton;
 const createAccBtn = LoginForm.querySelector(
   "#create-account-btn"
