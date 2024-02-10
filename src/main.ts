@@ -3,7 +3,7 @@ import "./styles/main.css";
 import { switchForm } from "./compontents/Form";
 import toggleloader from "./compontents/Loader";
 import { db, login, signout, signup } from "./Database/firebase";
-import { doc, collection, getDocs, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 
 export {
   signupform,
@@ -106,6 +106,7 @@ menuBtn.addEventListener("click", function (e): void {
 });
 // handle save button
 saveBtn.addEventListener("click", function (e) {
+  e.preventDefault();
   const activeBtn = document.querySelector(".active");
   const textarea = document.querySelector("textarea") as HTMLTextAreaElement;
   const displayEmail = document.querySelector(
@@ -130,6 +131,7 @@ saveBtn.addEventListener("click", function (e) {
   }
 });
 deleteBtn.addEventListener("click", function (e) {
+  e.preventDefault();
   // const activeBtn = document.querySelector(".active");
   // if (activeBtn) {
   //   const index = userData.findIndex(function (data) {
@@ -170,7 +172,7 @@ export function toggleDashboard(command: "open" | "close"): void {
 // open menu bar func
 function toggleMenu(command: "open" | "close"): void {
   const aside = document.querySelector("#dashboard-menu") as HTMLElement;
-
+  command;
   if (!aside.classList.contains("open-menu")) {
     aside.classList.add("open-menu");
     menuBtn.classList.add("open");

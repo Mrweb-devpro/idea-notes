@@ -1,16 +1,5 @@
 import { initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  collection,
-  doc,
-  getDoc,
-  Timestamp,
-  setDoc,
-  deleteDoc,
-  getDocs,
-  onSnapshot,
-  addDoc,
-} from "firebase/firestore";
+import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -21,7 +10,6 @@ import {
 
 import {
   ActiveDaysBtn,
-  dataT,
   displayMessgae,
   resetApp,
   setupAccount,
@@ -107,7 +95,7 @@ export function signout() {
 //login
 export function login(email: string, password: string) {
   signInWithEmailAndPassword(auth, email, password)
-    .then(function (cred) {
+    .then(function () {
       clearForm("login");
     })
     .catch(function (err) {
