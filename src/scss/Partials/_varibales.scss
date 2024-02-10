@@ -1,0 +1,10 @@
+@mixin flexCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+$main-color: #00cccc;
+$play-state: running;
+$radius: 5px;

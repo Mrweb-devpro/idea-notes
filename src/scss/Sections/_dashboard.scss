@@ -1,0 +1,224 @@
+section.section-dashboard {
+  background-color: #c3e6e0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  & > aside {
+    flex-shrink: 0;
+    width: 30rem;
+    height: 100svh;
+    padding: 2rem;
+    padding-top: 4rem;
+    background-color: #f7f7f7;
+    @include flexCenter;
+    gap: 3rem;
+    box-shadow: 2px 0 4px 2px #aaaaaacc;
+
+    & h1 {
+      font-size: 1.6rem;
+    }
+
+    & .days-cont {
+      padding: 1rem;
+      width: 100%;
+      height: 60%;
+      background-color: #ddd;
+      border-radius: $radius;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+
+      & button {
+        border-radius: $radius;
+        border: none;
+        font-size: 1.2rem;
+        padding: 0.8rem;
+        width: fit-content;
+        height: fit-content;
+        background-color: #aaa;
+        transition: 0.5s;
+
+        &:focus {
+          outline: none;
+        }
+
+        &:hover {
+          box-shadow: 0 0 2px 1px #cccccccc;
+          background-color: #91b6b6;
+        }
+        &.active {
+          background-color: $main-color;
+        }
+        &.add {
+          & button {
+            font-size: 2rem;
+            font-weight: 900;
+            padding: 0.7rem 0.8rem;
+          }
+        }
+      }
+    }
+    & .profile-cont {
+      @include flexCenter;
+      gap: 1rem;
+      width: 100%;
+
+      & img {
+        width: 6rem;
+        border-radius: $radius;
+      }
+      & p {
+        font-size: 1.3rem;
+      }
+      & .btn {
+        width: 70%;
+        padding: 1rem 0;
+        border-radius: $radius;
+        border: 2px solid $main-color;
+        background-color: transparent;
+        &:hover {
+          background-color: $main-color;
+        }
+      }
+    }
+  }
+  & > main {
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 2rem 7rem;
+    @include flexCenter;
+    justify-content: center;
+    gap: 4rem;
+
+    & header {
+      width: 100%;
+      @include flexCenter;
+      flex-direction: row;
+      justify-content: space-between;
+      transition: all 0.5s;
+
+      & button.menu-btn {
+        @include flexCenter;
+        // display: none;
+        align-items: flex-start;
+        gap: 0.5rem;
+        width: 3rem;
+        height: 3rem;
+        border: none;
+        background-color: transparent;
+        display: none;
+        & > div {
+          transition: all 0.5s;
+          display: block;
+          width: 100%;
+          height: 0.4rem;
+          border-radius: $radius;
+          background-color: #000;
+          &:nth-child(2) {
+            width: 50%;
+          }
+        }
+
+        &.open {
+          position: absolute;
+          top: 4%;
+          left: 4%;
+          z-index: 20;
+          & > div {
+            position: absolute;
+            transform-origin: center;
+            transform: rotate(-45deg);
+            &:nth-child(1) {
+              transform: rotate(45deg);
+            }
+            &:nth-child(2) {
+              display: none;
+            }
+          }
+        }
+      }
+      & > p.page-number {
+        font-size: 3rem;
+        font-family: sans-serif;
+        font-weight: bolder;
+        color: #aaaaaacc;
+      }
+    }
+    & > nav {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      & > p {
+        font-size: 1.4rem;
+        color: #555;
+      }
+      & .btn-cont {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+
+        & .btn {
+          padding: 0.8rem 2rem;
+          border: none;
+          font-size: 1.4rem;
+          @include flexCenter;
+          border-radius: $radius;
+          background-color: $main-color;
+          &:hover {
+            box-shadow: 0px 0 1px 2px #aaaaaacc;
+          }
+        }
+      }
+    }
+    & .container {
+      box-shadow: 0px 0 4px 2px #aaaaaacc;
+      padding: 3rem;
+      background-color: #fff;
+      border-radius: $radius;
+      position: relative;
+      width: 100%;
+      height: 70svh;
+
+      & textarea {
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        box-shadow: 0px 0 0.3px 0.2px #aaaaaacc;
+        resize: none;
+      }
+      &::before {
+        content: '"';
+        font-size: 4rem;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        position: absolute;
+        top: 6rem;
+        left: 1rem;
+      }
+      &::after {
+        content: '"';
+        font-size: 4rem;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        position: absolute;
+        top: 6rem;
+        right: 1rem;
+      }
+    }
+
+    & > p:last-child {
+      font-size: 1.5rem;
+      span {
+        color: red;
+      }
+    }
+  }
+}

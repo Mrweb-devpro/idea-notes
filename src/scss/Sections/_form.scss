@@ -1,0 +1,89 @@
+section.section-forms {
+  background: url("../assets/background.jpg");
+  background-size: cover;
+  background-position: center;
+  user-select: none;
+  @include flexCenter();
+
+  & > div {
+    @include flexCenter();
+    flex-direction: row;
+    justify-content: flex-start;
+    // overflow: hidden;
+
+    & > form {
+      width: max-content;
+      height: fit-content;
+      @include flexCenter;
+      transition: all 0.5s;
+      transform-origin: center;
+      background-color: #e9e9e999;
+      padding: 4rem 3rem;
+      gap: 2rem;
+      border-radius: $radius;
+      box-shadow: 0 0 1px 1px #ccc;
+
+      & header {
+        @include flexCenter;
+        gap: 2rem;
+        font-family: inherit;
+        h1 {
+          font-size: 2.6rem;
+        }
+        & p {
+          font-family: inherit;
+          color: #666;
+          font-size: 1.4rem;
+        }
+      }
+      .inp-cont {
+        @include flexCenter();
+
+        gap: 2rem;
+
+        & .inp {
+          padding: 1rem 1.5rem;
+          width: 29rem;
+          border-radius: $radius;
+          border: none;
+          outline: none;
+          &::placeholder {
+            font-family: "Itim", cursive;
+          }
+        }
+      }
+      .btn-cont {
+        width: 24rem;
+        @include flexCenter();
+        flex-direction: row;
+        gap: 1.2rem;
+
+        & .btn {
+          width: 100%;
+          padding: 1rem 0;
+          border: none;
+          border-radius: $radius;
+          font-weight: 500;
+          font-family: "Itim", cursive;
+          @include flexCenter();
+          flex-direction: row;
+          gap: 0.5rem;
+
+          &:hover {
+            cursor: pointer;
+          }
+          &:focus {
+            outline: none;
+          }
+          &.submit {
+            background-color: $main-color;
+          }
+        }
+      }
+      & a {
+        align-self: flex-start;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

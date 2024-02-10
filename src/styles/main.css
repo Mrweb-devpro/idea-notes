@@ -1,0 +1,583 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+  letter-spacing: 0.8px;
+  transition: all 0.5s;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  font-family: "Itim", cursive;
+  color: #222;
+  display: flex;
+  overflow: hidden;
+}
+
+.icon {
+  width: 15px;
+  height: 15px;
+}
+
+.hide {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translatex(-400vw) translateY(-50%);
+}
+
+.displayNone {
+  display: none;
+}
+
+.popup-hide {
+  position: absolute;
+  transform: scale(0);
+}
+.popup-hide * {
+  animation: none !important;
+}
+
+.page-slider {
+  margin-left: -100svw;
+  z-index: 9;
+  overflow: hidden;
+}
+
+section {
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+button {
+  transition: all 0.5s;
+}
+button:hover {
+  cursor: pointer;
+}
+
+section.section-forms {
+  background: url("../assets/background.jpg");
+  background-size: cover;
+  background-position: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+section.section-forms > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+section.section-forms > div > form {
+  width: -moz-max-content;
+  width: max-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s;
+  transform-origin: center;
+  background-color: rgba(233, 233, 233, 0.6);
+  padding: 4rem 3rem;
+  gap: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 0 1px 1px #ccc;
+}
+section.section-forms > div > form header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  font-family: inherit;
+}
+section.section-forms > div > form header h1 {
+  font-size: 2.6rem;
+}
+section.section-forms > div > form header p {
+  font-family: inherit;
+  color: #666;
+  font-size: 1.4rem;
+}
+section.section-forms > div > form .inp-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+section.section-forms > div > form .inp-cont .inp {
+  padding: 1rem 1.5rem;
+  width: 29rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+section.section-forms > div > form .inp-cont .inp::-moz-placeholder {
+  font-family: "Itim", cursive;
+}
+section.section-forms > div > form .inp-cont .inp::placeholder {
+  font-family: "Itim", cursive;
+}
+section.section-forms > div > form .btn-cont {
+  width: 24rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 1.2rem;
+}
+section.section-forms > div > form .btn-cont .btn {
+  width: 100%;
+  padding: 1rem 0;
+  border: none;
+  border-radius: 5px;
+  font-weight: 500;
+  font-family: "Itim", cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+section.section-forms > div > form .btn-cont .btn:hover {
+  cursor: pointer;
+}
+section.section-forms > div > form .btn-cont .btn:focus {
+  outline: none;
+}
+section.section-forms > div > form .btn-cont .btn.submit {
+  background-color: #00cccc;
+}
+section.section-forms > div > form a {
+  align-self: flex-start;
+  font-size: 1.2rem;
+}
+
+section.section-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  background-color: rgba(34, 34, 34, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  transition: 0.1s;
+  overflow: hidden;
+}
+section.section-loader > div {
+  width: 1rem;
+  height: 1rem;
+  position: relative;
+  border-radius: 10px;
+}
+section.section-loader > div > span {
+  box-shadow: 0px 0px 2px 2px rgba(136, 136, 136, 0.8);
+  border-radius: inherit;
+  position: absolute;
+  top: 0%;
+  left: 0;
+  width: 1rem;
+  height: 1rem;
+  background-color: #00cccc;
+  transform-origin: right;
+  animation: animate 2s linear infinite;
+  animation-delay: var(--i);
+  animation-play-state: running;
+}
+section.section-loader > div > span.accent {
+  background-color: #f6b9b8;
+}
+section.section-loader p {
+  font-size: xx-large;
+  animation: animate2 4s linear infinite;
+  animation-play-state: running;
+}
+
+@keyframes animate {
+  0% {
+    transform: translate(0);
+  }
+  25% {
+    transform: translateX(100%);
+  }
+  50% {
+    transform: translateX(100%) translateY(100%);
+  }
+  75% {
+    transform: translateX(0) translateY(100%);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+@keyframes animate2 {
+  0% {
+    color: #eee;
+  }
+  50% {
+    color: #00cccc;
+  }
+  100% {
+    color: #eee;
+  }
+}
+section.section-dashboard {
+  background-color: #c3e6e0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+section.section-dashboard > aside {
+  flex-shrink: 0;
+  width: 30rem;
+  height: 100svh;
+  padding: 2rem;
+  padding-top: 4rem;
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  box-shadow: 2px 0 4px 2px rgba(170, 170, 170, 0.8);
+}
+section.section-dashboard > aside h1 {
+  font-size: 1.6rem;
+}
+section.section-dashboard > aside .days-cont {
+  padding: 1rem;
+  width: 100%;
+  height: 60%;
+  background-color: #ddd;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+section.section-dashboard > aside .days-cont button {
+  border-radius: 5px;
+  border: none;
+  font-size: 1.2rem;
+  padding: 0.8rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #aaa;
+  transition: 0.5s;
+}
+section.section-dashboard > aside .days-cont button:focus {
+  outline: none;
+}
+section.section-dashboard > aside .days-cont button:hover {
+  box-shadow: 0 0 2px 1px rgba(204, 204, 204, 0.8);
+  background-color: #91b6b6;
+}
+section.section-dashboard > aside .days-cont button.active {
+  background-color: #00cccc;
+}
+section.section-dashboard > aside .days-cont button.add button {
+  font-size: 2rem;
+  font-weight: 900;
+  padding: 0.7rem 0.8rem;
+}
+section.section-dashboard > aside .profile-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+}
+section.section-dashboard > aside .profile-cont img {
+  width: 6rem;
+  border-radius: 5px;
+}
+section.section-dashboard > aside .profile-cont p {
+  font-size: 1.3rem;
+}
+section.section-dashboard > aside .profile-cont .btn {
+  width: 70%;
+  padding: 1rem 0;
+  border-radius: 5px;
+  border: 2px solid #00cccc;
+  background-color: transparent;
+}
+section.section-dashboard > aside .profile-cont .btn:hover {
+  background-color: #00cccc;
+}
+section.section-dashboard > main {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 2rem 7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-content: center;
+  gap: 4rem;
+}
+section.section-dashboard > main header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  transition: all 0.5s;
+}
+section.section-dashboard > main header button.menu-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  background-color: transparent;
+  display: none;
+}
+section.section-dashboard > main header button.menu-btn > div {
+  transition: all 0.5s;
+  display: block;
+  width: 100%;
+  height: 0.4rem;
+  border-radius: 5px;
+  background-color: #000;
+}
+section.section-dashboard > main header button.menu-btn > div:nth-child(2) {
+  width: 50%;
+}
+section.section-dashboard > main header button.menu-btn.open {
+  position: absolute;
+  top: 4%;
+  left: 4%;
+  z-index: 20;
+}
+section.section-dashboard > main header button.menu-btn.open > div {
+  position: absolute;
+  transform-origin: center;
+  transform: rotate(-45deg);
+}
+section.section-dashboard > main header button.menu-btn.open > div:nth-child(1) {
+  transform: rotate(45deg);
+}
+section.section-dashboard > main header button.menu-btn.open > div:nth-child(2) {
+  display: none;
+}
+section.section-dashboard > main header > p.page-number {
+  font-size: 3rem;
+  font-family: sans-serif;
+  font-weight: bolder;
+  color: rgba(170, 170, 170, 0.8);
+}
+section.section-dashboard > main > nav {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+section.section-dashboard > main > nav > p {
+  font-size: 1.4rem;
+  color: #555;
+}
+section.section-dashboard > main > nav .btn-cont {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+section.section-dashboard > main > nav .btn-cont .btn {
+  padding: 0.8rem 2rem;
+  border: none;
+  font-size: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background-color: #00cccc;
+}
+section.section-dashboard > main > nav .btn-cont .btn:hover {
+  box-shadow: 0px 0 1px 2px rgba(170, 170, 170, 0.8);
+}
+section.section-dashboard > main .container {
+  box-shadow: 0px 0 4px 2px rgba(170, 170, 170, 0.8);
+  padding: 3rem;
+  background-color: #fff;
+  border-radius: 5px;
+  position: relative;
+  width: 100%;
+  height: 70svh;
+}
+section.section-dashboard > main .container textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  box-shadow: 0px 0 0.3px 0.2px rgba(170, 170, 170, 0.8);
+  resize: none;
+}
+section.section-dashboard > main .container::before {
+  content: '"';
+  font-size: 4rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  position: absolute;
+  top: 6rem;
+  left: 1rem;
+}
+section.section-dashboard > main .container::after {
+  content: '"';
+  font-size: 4rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  position: absolute;
+  top: 6rem;
+  right: 1rem;
+}
+section.section-dashboard > main > p:last-child {
+  font-size: 1.5rem;
+}
+section.section-dashboard > main > p:last-child span {
+  color: red;
+}
+
+article.display-message {
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: center;
+  z-index: 4;
+  width: 30rem;
+  min-height: 4rem;
+  background-color: #eee;
+  border-radius: 5px;
+  padding: 1rem;
+  transition: all 0.5s;
+  font-weight: bolder;
+  box-shadow: 0px 0 1px 2px rgba(204, 204, 204, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+article.display-message.close {
+  transform: translateY(-100vh);
+}
+article.display-message [data-type=error] {
+  color: #e40808 !important;
+}
+article.display-message [data-type=success] {
+  color: #056905 !important;
+}
+article.display-message .message {
+  color: #222;
+  height: 100%;
+  font-size: 1.4rem;
+}
+
+/* rem and em do NOT depend on html font-size in media queries! Instead, 1rem = 1em = 16px */
+/**************************/
+/* BELOW 1344px (Smaller desktops) */
+/**************************/
+/**************************/
+/* BELOW 1200px (Landscape Tablets) */
+/**************************/
+@media (max-width: 75em) {
+  html {
+    /* 9px / 16px  */
+    font-size: 56.25%;
+  }
+}
+/**************************/
+/* BELOW 944px (Tablets) */
+/**************************/
+@media (max-width: 59em) {
+  html {
+    /* 8px / 16px = 0.5 = 50% */
+    font-size: 50%;
+  }
+  section.section-forms div form {
+    gap: 4rem;
+  }
+  section.section-forms div form .inp-cont .inp {
+    width: 33rem;
+  }
+  section.section-forms div form .btn-cont {
+    flex-direction: column;
+  }
+  section.section-dashboard aside {
+    position: absolute;
+    z-index: 12;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transform: translateX(-300vh);
+    box-shadow: none;
+    transition: all 0.5s;
+  }
+  section.section-dashboard aside.open-menu {
+    transform: translateX(0);
+    box-shadow: initial;
+  }
+  section.section-dashboard main {
+    padding: 2rem;
+  }
+  section.section-dashboard main header button.menu-btn {
+    display: flex;
+  }
+  section.section-dashboard main header > .page-number {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  section.section-dashboard main > nav .btn-cont {
+    flex-direction: column;
+  }
+  section.section-dashboard main .container {
+    width: 95%;
+  }
+}
+/**************************/
+/* BELOW 704px (Smaller tablets) */
+/**************************/
+/**************************/
+/* BELOW 544px (Phones) */
+/**************************//*# sourceMappingURL=main.css.map */

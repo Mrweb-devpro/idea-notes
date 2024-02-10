@@ -1,0 +1,76 @@
+section.section-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  background-color: #222222cc;
+  @include flexCenter;
+  gap: 4rem;
+  transition: 0.1s;
+  overflow: hidden;
+
+  & > div {
+    $size: 1rem;
+
+    width: $size;
+    height: $size;
+    position: relative;
+    border-radius: 10px;
+
+    & > span {
+      box-shadow: 0px 0px 2px 2px #888888cc;
+      border-radius: inherit;
+      position: absolute;
+      top: 0%;
+      left: 0;
+      width: $size;
+      height: $size;
+      background-color: $main-color;
+      transform-origin: right;
+      animation: animate 2s linear infinite;
+      animation-delay: var(--i);
+      animation-play-state: $play-state;
+      &.accent {
+        background-color: #f6b9b8;
+      }
+    }
+  }
+  & p {
+    font-size: xx-large;
+    animation: animate2 4s linear infinite;
+    animation-play-state: $play-state;
+  }
+}
+
+@keyframes animate {
+  0% {
+    transform: translate(0);
+  }
+  25% {
+    transform: translateX(100%);
+  }
+  50% {
+    transform: translateX(100%) translateY(100%);
+  }
+
+  75% {
+    transform: translateX(0) translateY(100%);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+@keyframes animate2 {
+  0% {
+    color: #eee;
+  }
+
+  50% {
+    color: $main-color;
+  }
+
+  100% {
+    color: #eee;
+  }
+}
