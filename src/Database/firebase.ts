@@ -53,13 +53,17 @@ onAuthStateChanged(
       toggleDashboard("open");
       setupAccount(user);
       // getting data
-      getData(user).then(function (col) {
-        let data: any[] = [];
-        col.docs.forEach(function (doc) {
-          data.push({ ...doc.data(), id: doc.id });
+      getData(user)
+        .then(function (col) {
+          let data: any[] = [];
+          col.docs.forEach(function (doc) {
+            data.push({ ...doc.data(), id: doc.id });
+          });
+          ActiveDaysBtn(data);
+        })
+        .catch(function (err) {
+          console.log(err.message);
         });
-        ActiveDaysBtn(data);
-      });
     } else {
       displayMessgae("Sign in to open idea notes", "normal");
     }
@@ -73,7 +77,10 @@ onAuthStateChanged(
 export function signup(email: string, password: string) {
   createUserWithEmailAndPassword(auth, email, password)
     .then(function (cred) {
-      const colRef = collection(db, `${cred.user.email}`);
+      const colRef = collection(
+        db,
+        `USERS/${cred.user.uid}/${cred.user.email}`
+      );
       clearForm("signup");
       addDoc(colRef, {
         day: "01",
@@ -105,7 +112,7 @@ export function login(email: string, password: string) {
 /// getting data
 
 export function getData(user: any) {
-  const docRef = getDocs(collection(db, user.email));
+  const docRef = getDocs(collection(db, `USERS/${user.uid}/userData`));
   return docRef;
 }
 //////////////////////////////////
