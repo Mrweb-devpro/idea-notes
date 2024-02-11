@@ -42,6 +42,7 @@ export type dataT = {
 //Elements /////////////////////////////////
 //--START
 /////////////////////////////////////////////////////
+
 const signupform = document.querySelector("form.signup") as HTMLFormElement;
 const signupEmailInp: HTMLInputElement = signupform.querySelector(
   "#signup-email"
@@ -74,6 +75,8 @@ const deleteBtn = document.querySelector("#delete-btn") as HTMLButtonElement;
 // Eventlisteners////////////////////////////////////
 //--START
 ///////////////////////////////////////////////////////
+console.log("hey");
+//
 
 // signup
 signupSumbit.addEventListener("click", function (e: Event): void {
