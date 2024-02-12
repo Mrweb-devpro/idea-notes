@@ -1,5 +1,7 @@
 //
-import "./styles/main.css";
+// i user the command  npm i -D sass to add sass to vite
+
+import "./scss/main.scss";
 import { switchForm } from "./compontents/Form";
 import toggleloader from "./compontents/Loader";
 import { db, login, signout, signup } from "./Database/firebase";
