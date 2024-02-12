@@ -75,8 +75,6 @@ const deleteBtn = document.querySelector("#delete-btn") as HTMLButtonElement;
 // Eventlisteners////////////////////////////////////
 //--START
 ///////////////////////////////////////////////////////
-console.log("hey");
-//
 
 // signup
 signupSumbit.addEventListener("click", function (e: Event): void {
