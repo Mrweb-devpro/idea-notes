@@ -95,7 +95,9 @@ section.section-dashboard {
     @include flexCenter;
     justify-content: center;
     gap: 4rem;
-
+    &.hide-in-main {
+      visibility: hidden !important;
+    }
     & header {
       width: 100%;
       @include flexCenter;

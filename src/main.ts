@@ -155,6 +155,7 @@ deleteBtn.addEventListener("click", function (e) {
   if (activeBtn) {
     const ID: string = activeBtn.getAttribute("data-id") + "";
     deleteData(ID);
+    resetMain();
   }
 });
 
@@ -169,6 +170,7 @@ export function toggleDashboard(command: "open" | "close"): void {
 
   if (command === "open") {
     toggleloader("open");
+    resetMain();
 
     setTimeout(() => {
       formSection.classList.add("page-slider");
@@ -215,6 +217,8 @@ export function ActiveDaysBtn(data: dataT): void {
   daysBtnCont.innerHTML = html;
 
   const daysButtons = document.querySelectorAll("#day-btn");
+  const main = document.querySelector(".dash-main");
+
   daysButtons.forEach(function (btn: Element): void {
     btn.addEventListener("click", function (e) {
       e.preventDefault();
@@ -228,6 +232,7 @@ export function ActiveDaysBtn(data: dataT): void {
         (da) => da.index === Number(btn.getAttribute("data-index"))
       );
       displayData(currentData[0]);
+      main?.classList.remove("hide-in-main");
     });
   });
   const addBtn = document.querySelector("#add") as HTMLButtonElement;
@@ -288,6 +293,7 @@ export function resetApp() {
   toggleMenu("close");
   setupAccount({ email: "" });
   toggleDashboard("close");
+  resetMain();
 }
 
 export function setupAccount(user: any): void {
@@ -301,7 +307,9 @@ function resetMain() {
   const modifiedDate = document.querySelector("#modified-date") as HTMLElement;
   const textarea = document.querySelector("textarea") as HTMLTextAreaElement;
   const pageNumber = document.querySelector(".page-number") as HTMLElement;
+  const main = document.querySelector(".dash-main");
 
   modifiedDate.innerHTML = textarea.value = pageNumber.innerHTML = "";
   toggleMenu("close");
+  main?.classList.add("hide-in-main");
 }
