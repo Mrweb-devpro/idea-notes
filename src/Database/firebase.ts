@@ -80,7 +80,7 @@ onAuthStateChanged(
         }
       );
     } else {
-      displayMessgae("Sign in to open idea notes", "normal");
+      displayMessgae("Sign up to open idea notes", "normal");
     }
   },
   function (err) {
@@ -98,6 +98,7 @@ export function signup(email: string, password: string) {
         day: "01",
         content: "// TYPE SOMETHING  ....",
         date: new Date().toISOString(),
+        index: 1,
       });
     })
     .catch(function (err) {
@@ -125,13 +126,14 @@ export function login(email: string, password: string) {
 // google Auth
 export function signupWithGoogle() {
   signInWithRedirect(auth, provider);
+  displayMessgae("This feature is not avaliable yet", "normal");
 }
 /// getting data
 
 export function getData(user: any) {
   // const docRef = getDocs(collection(db, `USERS/${user.uid}/userData`));
   const colRef = collection(db, `USERS/${user.uid}/userData`);
-  const orderColRef = query(colRef, orderBy("day"));
+  const orderColRef = query(colRef, orderBy("index"));
   return orderColRef;
 }
 // updateing dos
@@ -166,6 +168,7 @@ export function addData(newDay: number) {
       day: `0${newDay}`,
       content: "// TYPE SOMETHING  ....",
       date: new Date().toISOString(),
+      index: newDay,
     });
   }
 }

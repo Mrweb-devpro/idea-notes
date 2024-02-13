@@ -89,6 +89,8 @@ signupSumbit.addEventListener("click", function (e: Event): void {
   e.preventDefault();
   if ((signupEmailInp.value, siginupPasswordInp.value)) {
     signup(signupEmailInp.value, siginupPasswordInp.value);
+  } else {
+    displayMessgae("Sign up to open idea notes", "normal");
   }
 });
 
