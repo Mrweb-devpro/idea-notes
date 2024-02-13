@@ -96,7 +96,21 @@ section.section-dashboard {
     justify-content: center;
     gap: 4rem;
     &.hide-in-main {
-      visibility: hidden !important;
+      & > *:not(header) {
+        visibility: hidden !important;
+      }
+      &::after {
+        content: "Open any idea note in the menu option";
+        min-width: 90vw;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        @include flexCenter;
+        font-size: 3rem;
+        font-weight: bolder;
+        color: #777;
+      }
     }
     & header {
       width: 100%;
