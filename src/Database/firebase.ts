@@ -12,7 +12,6 @@ import {
 import {
   createUserWithEmailAndPassword,
   getAuth,
-  getRedirectResult,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithRedirect,
@@ -131,7 +130,7 @@ export function signupWithGoogle() {
 
 export function getData(user: any) {
   // const docRef = getDocs(collection(db, `USERS/${user.uid}/userData`));
-  const colRef = collection(db, `USERS/${auth.currentUser?.uid}/userData`);
+  const colRef = collection(db, `USERS/${user.uid}/userData`);
   const orderColRef = query(colRef, orderBy("day"));
   return orderColRef;
 }
