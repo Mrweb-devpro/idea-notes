@@ -259,11 +259,8 @@ function displayData(data: any) {
     .replace("Fri", "Friday")
     .replace("Sat", "Saturday")
     .replace("Sun", "Sunday");
-  console.clear();
-  console.log(data.date);
   textarea.value = data.content;
   pageNumber.textContent = "0" + data.index;
-  console.log(data);
 
   displayMessgae("Opened idea " + `0${data.index}`, "normal");
 }
