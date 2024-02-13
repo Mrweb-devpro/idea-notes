@@ -8,13 +8,13 @@ import {
   onSnapshot,
   query,
   orderBy,
+  deleteDoc,
 } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  signInWithRedirect,
   signOut,
 } from "firebase/auth";
 
@@ -26,7 +26,6 @@ import {
   toggleDashboard,
 } from "../main";
 import { clearForm } from "../compontents/Form";
-import { GoogleAuthProvider } from "firebase/auth/cordova";
 // Import the functions you need from the SDKs you need
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -53,25 +52,23 @@ const db = getFirestore(app);
 
 /// Autentication
 const auth = getAuth(app);
-auth.languageCode = "en";
 
 // FireBase Auth PRovider
-const provider = new GoogleAuthProvider();
 
 // auth status change
 onAuthStateChanged(
   auth,
   function (user) {
     if (user) {
-      toggleDashboard("open");
       setupAccount(user);
+      toggleDashboard("open");
 
       onSnapshot(
         getData(user),
         function (snapshot) {
           let data: any[] = [];
-          snapshot.docs.forEach(function (doc) {
-            data.push({ ...doc.data(), id: doc.id });
+          snapshot.docs.forEach(function (doc, i) {
+            data.push({ ...doc.data(), id: doc.id, index: i + 1 });
           });
           ActiveDaysBtn(data);
         },
@@ -95,8 +92,7 @@ export function signup(email: string, password: string) {
       const colRef = collection(db, `USERS/${cred.user.uid}/userData`);
       clearForm("signup");
       addDoc(colRef, {
-        day: "01",
-        content: "// TYPE SOMETHING  ....",
+        content: `// TYPE SOMETHING  ....`,
         date: new Date().toISOString(),
         index: 1,
       });
@@ -125,7 +121,6 @@ export function login(email: string, password: string) {
 
 // google Auth
 export function signupWithGoogle() {
-  signInWithRedirect(auth, provider);
   displayMessgae("This feature is not avaliable yet", "normal");
 }
 /// getting data
@@ -140,18 +135,16 @@ export function getData(user: any) {
 
 export function updateData(
   activeBtn: HTMLButtonElement,
-  textarea: HTMLTextAreaElement,
-  modifiedDate: HTMLElement
+  textarea: HTMLTextAreaElement
+  // modifiedDate: HTMLElement
 ) {
-  modifiedDate.innerHTML = new Date().toDateString();
-  updateDoc(
-    doc(
-      db,
-      `USERS/${auth.currentUser?.uid}/userData`,
-      `${activeBtn.getAttribute("data-id")}`.trim()
-    ),
-    { content: textarea.value, date: new Date().toISOString() }
-  )
+  const dataID = `${activeBtn.getAttribute("data-id")}`.trim();
+  const docRef = doc(db, `USERS/${auth.currentUser?.uid}/userData`, dataID);
+
+  updateDoc(docRef, {
+    content: textarea.value,
+    date: new Date().toISOString(),
+  })
     .then(function () {
       displayMessgae("SAVED", "success");
     })
@@ -165,11 +158,26 @@ export function addData(newDay: number) {
     const colRef = collection(db, `USERS/${auth.currentUser?.uid}/userData`);
 
     addDoc(colRef, {
-      day: `0${newDay}`,
       content: "// TYPE SOMETHING  ....",
       date: new Date().toISOString(),
       index: newDay,
     });
+  }
+}
+export function deleteData(dataID: string) {
+  if (auth.currentUser) {
+    const docRef = doc(
+      db,
+      `USERS/${auth.currentUser?.uid}/userData/`,
+      dataID.trim()
+    );
+    deleteDoc(docRef)
+      .then(function () {
+        displayMessgae("Deleted!", "success");
+      })
+      .catch(function (err) {
+        displayMessgae(extractError(err.message), "error");
+      });
   }
 }
 //////////////////////////////////

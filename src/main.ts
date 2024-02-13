@@ -6,6 +6,7 @@ import { switchForm } from "./compontents/Form";
 import toggleloader from "./compontents/Loader";
 import {
   addData,
+  deleteData,
   login,
   signout,
   signup,
@@ -28,6 +29,7 @@ export type dataT = {
   date: string;
   content: string;
   id: string;
+  index: number;
 }[];
 
 // manual data (hard coded for testing phase)
@@ -78,6 +80,7 @@ const createAccBtn = LoginForm.querySelector(
 const menuBtn = document.querySelector(".menu-btn") as HTMLButtonElement;
 const logoutBtn = document.querySelector("#logout-btn") as HTMLButtonElement;
 const saveBtn = document.querySelector("#save-btn") as HTMLButtonElement;
+const deleteBtn = document.querySelector("#delete-btn") as HTMLButtonElement;
 
 ///////////////////////////////////////////////////////
 // Eventlisteners////////////////////////////////////
@@ -139,10 +142,19 @@ saveBtn.addEventListener("click", function (e) {
   e.preventDefault();
   const activeBtn = document.querySelector(".active") as HTMLButtonElement;
   const textarea = document.querySelector("textarea") as HTMLTextAreaElement;
-  const modifiedDate = document.querySelector("#modified-date") as HTMLElement;
+  // const modifiedDate = document.querySelector("#modified-date") as HTMLElement;
 
   if (activeBtn) {
-    updateData(activeBtn, textarea, modifiedDate);
+    updateData(activeBtn, textarea);
+    activeBtn.click();
+  }
+});
+deleteBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+  const activeBtn = document.querySelector(".active") as HTMLButtonElement;
+  if (activeBtn) {
+    const ID: string = activeBtn.getAttribute("data-id") + "";
+    deleteData(ID);
   }
 });
 
@@ -178,13 +190,14 @@ export function toggleDashboard(command: "open" | "close"): void {
 function toggleMenu(command: "open" | "close"): void {
   const aside = document.querySelector("#dashboard-menu") as HTMLElement;
   command;
-  if (!aside.classList.contains("open-menu")) {
-    aside.classList.add("open-menu");
-    menuBtn.classList.add("open");
-  } else {
-    aside.classList.remove("open-menu");
-    menuBtn.classList.remove("open");
-  }
+
+  aside.classList.toggle("open-menu");
+  menuBtn.classList.toggle("open");
+
+  // if (command === "close") {
+  //   aside.classList.remove("open-menu");
+  //   menuBtn.classList.remove("open");
+  // }
 }
 
 // activate days buttons
@@ -195,8 +208,8 @@ export function ActiveDaysBtn(data: dataT): void {
   const daysBtnCont = document.querySelector(".days-cont") as HTMLDivElement;
 
   // setting the days button
-  data.forEach(function ({ day, id }: any) {
-    html += `<button type="button" id="day-btn" data-day="${day}" data-id="${id}">day${day}</button>`;
+  data.forEach(function ({ id, index }: any) {
+    html += `<button type="button" id="day-btn" data-index="${index}" data-id="${id}">idea0${index}</button>`;
   });
   html += `<button type="button" id="add">&plus;</button>`;
   daysBtnCont.innerHTML = html;
@@ -212,7 +225,7 @@ export function ActiveDaysBtn(data: dataT): void {
       btn.classList.add("active");
 
       currentData = data.filter(
-        (data) => data.day === btn.getAttribute("data-day")
+        (da) => da.index === Number(btn.getAttribute("data-index"))
       );
       displayData(currentData[0]);
     });
@@ -221,7 +234,7 @@ export function ActiveDaysBtn(data: dataT): void {
   addBtn.addEventListener("click", function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
-
+    toggleMenu("open");
     addData(daysButtons.length + 1);
   });
 }
@@ -231,11 +244,23 @@ function displayData(data: any) {
   const textarea = document.querySelector("textarea") as HTMLTextAreaElement;
   const pageNumber = document.querySelector(".page-number") as HTMLElement;
 
-  modifiedDate.textContent = new Date(data.date).toDateString();
+  modifiedDate.textContent = `${new Date(data.date).toDateString()}  ${new Date(
+    data.date
+  ).toLocaleTimeString()}`
+    .replace("Mon", "Monday")
+    .replace("Tue", "Tuesday")
+    .replace("Wed", "Wednesday")
+    .replace("Thur", "Thursday")
+    .replace("Fri", "Friday")
+    .replace("Sat", "Saturday")
+    .replace("Sun", "Sunday");
+  console.clear();
+  console.log(data.date);
   textarea.value = data.content;
-  pageNumber.textContent = data.day;
+  pageNumber.textContent = "0" + data.index;
+  console.log(data);
 
-  displayMessgae("Opened day " + data.day, "normal");
+  displayMessgae("Opened idea " + `0${data.index}`, "normal");
 }
 
 ///  for displaying any type  of message on the ui (func)
