@@ -29,6 +29,7 @@ section.section-dashboard {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
+      align-content: baseline;
       gap: 0.8rem;
 
       & button {

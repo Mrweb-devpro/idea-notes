@@ -4,8 +4,14 @@
 import "./scss/main.scss";
 import { switchForm } from "./compontents/Form";
 import toggleloader from "./compontents/Loader";
-import { db, login, signout, signup } from "./Database/firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import {
+  addData,
+  login,
+  signout,
+  signup,
+  signupWithGoogle,
+  updateData,
+} from "./Database/firebase";
 
 export {
   signupform,
@@ -53,6 +59,7 @@ const siginupPasswordInp: HTMLInputElement = signupform.querySelector(
   "#signup-password"
 ) as HTMLInputElement;
 const signupSumbit = signupform.signupSubmit;
+const signupWithGoogleBtn = signupform["google-btn"];
 const hasAccBtn = signupform.querySelector(
   "#has-account-btn"
 ) as HTMLAnchorElement;
@@ -71,7 +78,6 @@ const createAccBtn = LoginForm.querySelector(
 const menuBtn = document.querySelector(".menu-btn") as HTMLButtonElement;
 const logoutBtn = document.querySelector("#logout-btn") as HTMLButtonElement;
 const saveBtn = document.querySelector("#save-btn") as HTMLButtonElement;
-const deleteBtn = document.querySelector("#delete-btn") as HTMLButtonElement;
 
 ///////////////////////////////////////////////////////
 // Eventlisteners////////////////////////////////////
@@ -85,6 +91,14 @@ signupSumbit.addEventListener("click", function (e: Event): void {
     signup(signupEmailInp.value, siginupPasswordInp.value);
   }
 });
+
+// Google auth
+signupWithGoogleBtn.addEventListener("click", function (e: any) {
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  signupWithGoogle();
+});
+
 // login
 loginSumbit.addEventListener("click", function (e: Event): void {
   e.preventDefault();
@@ -102,55 +116,34 @@ logoutBtn.addEventListener("click", function (e) {
 // swtiching form form signup to login
 hasAccBtn.addEventListener("click", function (e): void {
   e.preventDefault();
+  e.stopImmediatePropagation();
   switchForm(signupform, LoginForm);
 });
 
 // swtiching form form  login to signup
 createAccBtn.addEventListener("click", function (e): void {
   e.preventDefault();
+  e.stopImmediatePropagation();
+
   switchForm(LoginForm, signupform);
 });
 menuBtn.addEventListener("click", function (e): void {
   e.preventDefault();
+  e.stopImmediatePropagation();
   toggleMenu("open");
 });
 // handle save button
 saveBtn.addEventListener("click", function (e) {
   e.preventDefault();
-  const activeBtn = document.querySelector(".active");
+  const activeBtn = document.querySelector(".active") as HTMLButtonElement;
   const textarea = document.querySelector("textarea") as HTMLTextAreaElement;
-  const displayEmail = document.querySelector(
-    "#disaply-email"
-  ) as HTMLParagraphElement;
+  const modifiedDate = document.querySelector("#modified-date") as HTMLElement;
 
   if (activeBtn) {
-    updateDoc(
-      doc(
-        db,
-        `${displayEmail.textContent}`,
-        `${activeBtn.getAttribute("data-id")}`.trim()
-      ),
-      { content: textarea.value }
-    )
-      .then(function () {
-        displayMessgae("SAVED", "success");
-      })
-      .catch(function (err) {
-        displayMessgae(err.message, "error");
-      });
+    updateData(activeBtn, textarea, modifiedDate);
   }
 });
-deleteBtn.addEventListener("click", function (e) {
-  e.preventDefault();
-  // const activeBtn = document.querySelector(".active");
-  // if (activeBtn) {
-  //   const index = userData.findIndex(function (data) {
-  //     return data.day === activeBtn.getAttribute("data-day");
-  //   });
-  //   userData.splice(index, index + 1);
-  //   ActiveDaysBtn(userData);
-  // }
-});
+
 /////////////////////////////////////////////////////
 //resuable funcitons/////////////////////////////////
 //--START
@@ -195,20 +188,22 @@ function toggleMenu(command: "open" | "close"): void {
 // activate days buttons
 export function ActiveDaysBtn(data: dataT): void {
   resetMain();
-  const daysBtnCont = document.querySelector(".days-cont") as HTMLDivElement;
+  let currentData;
   let html: string = "";
-  data.forEach(function (dayObj: any) {
-    html += `<button type="button" id="day-btn" data-day="${dayObj.day}" data-id="${dayObj.id}">day${dayObj.day}</button>`;
+  const daysBtnCont = document.querySelector(".days-cont") as HTMLDivElement;
+
+  // setting the days button
+  data.forEach(function ({ day, id }: any) {
+    html += `<button type="button" id="day-btn" data-day="${day}" data-id="${id}">day${day}</button>`;
   });
   html += `<button type="button" id="add">&plus;</button>`;
   daysBtnCont.innerHTML = html;
 
   const daysButtons = document.querySelectorAll("#day-btn");
-  let currentData;
   daysButtons.forEach(function (btn: Element): void {
     btn.addEventListener("click", function (e) {
       e.preventDefault();
-      //reset active btn
+      // reset active btn
       daysButtons.forEach(function (btn2) {
         if (btn2.classList.contains("active")) btn2.classList.remove("active");
       });
@@ -219,6 +214,13 @@ export function ActiveDaysBtn(data: dataT): void {
       );
       displayData(currentData[0]);
     });
+  });
+  const addBtn = document.querySelector("#add") as HTMLButtonElement;
+  addBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    addData(daysButtons.length + 1);
   });
 }
 
@@ -263,7 +265,7 @@ export function resetApp() {
 
 export function setupAccount(user: any): void {
   const displayEmail = document.querySelector(
-    "#disaply-email"
+    "#display-email"
   ) as HTMLParagraphElement;
 
   displayEmail.textContent = user.email;
@@ -274,4 +276,5 @@ function resetMain() {
   const pageNumber = document.querySelector(".page-number") as HTMLElement;
 
   modifiedDate.innerHTML = textarea.value = pageNumber.innerHTML = "";
+  toggleMenu("close");
 }

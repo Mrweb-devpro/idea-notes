@@ -34,12 +34,13 @@
     }
   }
   section.section-dashboard {
+    position: relative;
     & aside {
       position: absolute;
       z-index: 12;
       top: 0;
       left: 0;
-      height: 100vh;
+      height: 100%;
       transform: translateX(-300vh);
       box-shadow: none;
       transition: all 0.5s;
@@ -55,7 +56,7 @@
         & button.menu-btn {
           display: flex;
         }
-        & > .page-number {
+        & > p.page-number {
           width: 100%;
           @include flexCenter;
           align-items: flex-end;
