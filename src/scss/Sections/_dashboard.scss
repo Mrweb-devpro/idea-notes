@@ -178,6 +178,7 @@ section.section-dashboard {
           background-color: $main-color;
           &#delete-btn {
             border: 2px solid $main-color;
+            background-color: transparent;
           }
           &:hover {
             background-color: $main-color;
