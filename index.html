@@ -22,7 +22,7 @@
   <body>
     <article class="display-message close">
       <p class="message" data-type="success">
-        Lorem ipsum dolor sit amet consectetur adipisicing
+        <!-- Lorem ipsum dolor sit amet consectetur adipisicing -->
       </p>
     </article>
 
@@ -130,7 +130,10 @@
     </section>
     <section class="section-dashboard">
       <aside id="dashboard-menu">
-        <h1>Days</h1>
+        <h1>
+          Idea notes
+          <span>Click on any idea note to open it </span>
+        </h1>
         <div class="days-cont">
           <!-- <button type="button" id="day-btn" data-day="01">day1</button>
           <button type="button" id="day-btn" data-day="02" class="active">
@@ -145,7 +148,7 @@
             alt="your profile image"
             class="profile-img"
           />
-          <p id="display-email">david nwokedike</p>
+          <p id="display-email">No user</p>
           <button type="button" class="btn" id="logout-btn">logout</button>
         </div>
       </aside>
@@ -156,18 +159,21 @@
             <div>&nbsp;</div>
             <div>&nbsp;</div>
           </button>
-          <p class="page-number">02</p>
+          <p class="page-number"></p>
         </header>
         <nav>
           <p>
             Modified:
-            <span id="modified-date">wednesday 12th jan 2023 </span>
+            <span id="modified-date"></span>
           </p>
           <div class="btn-cont">
             <button type="button" class="btn" id="save-btn">save</button>
             <button type="button" class="btn" id="delete-btn">delete</button>
           </div>
         </nav>
+        <p class="warning">
+          <span>Warning!:</span> Ensure to save before you leave!
+        </p>
         <div class="container">
           <textarea
             name="textarea"
@@ -178,7 +184,9 @@
             spellcheck="true"
           ></textarea>
         </div>
-        <p><span>Warning!:</span> Ensure to save before you leave!</p>
+        <footer>
+          <p>&copy;copyright by davidNwokedike</p>
+        </footer>
       </main>
     </section>
     <script type="module" src="src/main.ts"></script>

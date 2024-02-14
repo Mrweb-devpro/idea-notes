@@ -13,11 +13,18 @@ section.section-dashboard {
     padding-top: 4rem;
     background-color: #f7f7f7;
     @include flexCenter;
-    gap: 3rem;
+    gap: 2rem;
     box-shadow: 2px 0 4px 2px #aaaaaacc;
 
     & h1 {
       font-size: 1.6rem;
+      @include flexCenter;
+      gap: 2rem;
+      & span {
+        font-size: 1.2rem;
+        color: #777;
+        font-weight: normal;
+      }
     }
 
     & .days-cont {
@@ -94,13 +101,13 @@ section.section-dashboard {
     padding: 2rem 7rem;
     @include flexCenter;
     justify-content: center;
-    gap: 4rem;
+    gap: 2rem;
     &.hide-in-main {
-      & > *:not(header) {
+      & > *:not(header, footer) {
         visibility: hidden !important;
       }
       &::after {
-        content: "Open any idea note in the menu option";
+        content: "Open any idea note in the menu";
         min-width: 90vw;
         position: absolute;
         top: 50%;
@@ -208,7 +215,7 @@ section.section-dashboard {
       border-radius: $radius;
       position: relative;
       width: 100%;
-      height: 70svh;
+      height: 65svh;
 
       & textarea {
         width: 100%;
@@ -236,10 +243,16 @@ section.section-dashboard {
       }
     }
 
-    & > p:last-child {
+    & > p.warning {
       font-size: 1.5rem;
       span {
         color: red;
+      }
+    }
+    & footer {
+      & p {
+        font-size: 1.4rem;
+        color: #555;
       }
     }
   }
