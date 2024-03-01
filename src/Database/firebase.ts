@@ -16,6 +16,8 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  signInWithPopup,
+  GoogleAuthProvider,
 } from "firebase/auth";
 
 import {
@@ -121,7 +123,13 @@ export function login(email: string, password: string) {
 
 // google Auth
 export function signupWithGoogle() {
-  displayMessgae("This feature is not avaliable yet", "normal");
+  // displayMessgae("This feature is not avaliable yet", "normal");
+  const provider = new GoogleAuthProvider();
+
+  signInWithPopup(auth, provider).catch((error) => {
+    const errorMessage = error.message;
+    displayMessgae(errorMessage, "error");
+  });
 }
 /// getting data
 
