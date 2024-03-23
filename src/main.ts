@@ -1,6 +1,7 @@
 //
 // i user the command  npm i -D sass to add sass to vite
 
+
 import "./scss/main.scss";
 import { switchForm } from "./compontents/Form";
 import toggleloader from "./compontents/Loader";
